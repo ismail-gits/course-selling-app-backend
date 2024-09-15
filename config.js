@@ -1,3 +1,4 @@
 module.exports = {
-    JWT_SECRET: "ismailsecret"
+    USER_JWT_SECRET: "ismailsecret",
+    ADMIN_JWT_SECRET: "adminsecret"
 }

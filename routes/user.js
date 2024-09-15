@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = require('../config')
+const { USER_JWT_SECRET } = require('../config')
 const userMiddleware = require("../middleware/user")
 const { User, Course } = require("../db/index")
 const router = Router();
@@ -40,7 +40,7 @@ router.post('/signin', async (req, res) => {
     }
 
     try {
-        const jwtToken = jwt.sign({username}, JWT_SECRET)
+        const jwtToken = jwt.sign({username}, USER_JWT_SECRET)
         res.json({jwtToken})
     }
     catch(err) {
@@ -75,7 +75,7 @@ router.post('/courses/:courseId', userMiddleware, async (req, res) => {
 
 // Lists all the courses purchased by the user
 router.get('/purchasedCourses', userMiddleware, async (req, res) => {
-    const username = req.headers.username
+    const username = req.username
 
     const user = await User.findOne({username})
 

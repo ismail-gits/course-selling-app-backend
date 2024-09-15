@@ -1,4 +1,4 @@
-const { JWT_SECRET } = require("../config")
+const { ADMIN_JWT_SECRET } = require("../config")
 const jwt = require('jsonwebtoken')
 
 function adminMiddleware(req, res, next) {
@@ -7,7 +7,7 @@ function adminMiddleware(req, res, next) {
     const jwtToken = words[1]
 
     try {
-        const verifyToken = jwt.verify(jwtToken, JWT_SECRET)
+        const verifyToken = jwt.verify(jwtToken, ADMIN_JWT_SECRET)
         req.username = verifyToken.username
         next()
     }

@@ -1,4 +1,4 @@
-const { JWT_SECRET } = require("../config")
+const { USER_JWT_SECRET } = require("../config")
 const jwt = require('jsonwebtoken')
 
 function userMiddleware(req, res, next) {
@@ -7,7 +7,7 @@ function userMiddleware(req, res, next) {
     const jwtToken = words[1]
 
     try {
-        const verifyToken = jwt.verify(jwtToken, JWT_SECRET)
+        const verifyToken = jwt.verify(jwtToken, USER_JWT_SECRET)
         req.username = verifyToken.username
         next()
     }

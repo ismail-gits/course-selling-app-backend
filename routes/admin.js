@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = require("../config")
+const { ADMIN_JWT_SECRET } = require("../config")
 const adminMiddleware = require('../middleware/admin')
 const { Admin, Course } = require("../db/index")
 const router = Router()
@@ -36,7 +36,7 @@ router.post('/signin', async (req, res) => {
         return res.status(403).json("Invalid username or password")
     }
 
-    const jwtToken = jwt.sign({username}, JWT_SECRET)
+    const jwtToken = jwt.sign({username}, ADMIN_JWT_SECRET)
 
     res.json({jwtToken})
 })
