@@ -59,16 +59,18 @@ router.get('/courses', async (req, res) => {
 // Purchases a course
 router.post('/courses/:courseId', userMiddleware, async (req, res) => {
     const courseId = req.params.courseId
-    const username = req.headers.username
+    const username = req.username
 
-    await User.updateOne(
+    const updateConfirmed = await User.updateOne(
         {username},
         {
             $push: {purchasedCourses: courseId}
         }
     )
-
-    res.json({message: "Course purchased successfully"})
+    
+    if (updateConfirmed) {
+        res.json({message: "Course purchased successfully"})
+    }
 })
 
 // Lists all the courses purchased by the user

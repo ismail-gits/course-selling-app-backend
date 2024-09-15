@@ -8,6 +8,7 @@ function userMiddleware(req, res, next) {
 
     try {
         const verifyToken = jwt.verify(jwtToken, JWT_SECRET)
+        req.username = verifyToken.username
         next()
     }
     catch(err) {
