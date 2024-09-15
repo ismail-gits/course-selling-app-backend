@@ -1,7 +1,7 @@
 const { JWT_SECRET } = require("../config")
 const jwt = require('jsonwebtoken')
 
-async function adminMiddleware(req, res, next) {
+function adminMiddleware(req, res, next) {
     const token = req.headers.authorization
     const words = token.split(" ")
     const jwtToken = words[1]
